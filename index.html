@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valentine's Card</title>
     <style>
-        #catImage, #pitifulcat, #inlovecat, #sadlvl1, #sadlvl2, #sadlvl3, #sadlvl4, #sadlvl5, #sadlvl6, #sadlvl7 {
-            display: none;
-            max-width: 400px;
-            margin: 20px auto;
-        }
         body {
             text-align: center;
             font-family: Arial, sans-serif;
@@ -21,6 +16,11 @@
             font-size: 16px;
             cursor: pointer;
         }
+        #displayCat {
+            display: none;
+            max-width: 400px;
+            margin: 20px auto;
+        }
     </style>
 </head>
 <body>
@@ -29,35 +29,59 @@
     <button id="noBtn">No</button>
     
     <!--<img id="catImage" src="https://media1.tenor.com/m/2pIAmP3j1GwAAAAC/slap-table-green-alien-cat-angry.gif" alt="cat angry">-->
-    <img id="displayCat" style="display: none; max-width: 400px; margin: 20px auto;" alt="cat image">
+    <img id="displayCat" alt="cat image">
 
 
 
     <script>
         function kuringRandom() {
-            const sadlvls = ['sadlvl1', 'sadlvl2', 'sadlvl3', 'sadlvl4', 'sadlvl5', 'sadlvl6', 'sadlvl7'];
+            const sadCats = [
+                "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat1.webp",
+                "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat2.gif",
+                "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat3.gif",
+                "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat4.webp",
+                "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat5.gif",
+                "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat6.webp",
+                "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat7.gif"
+            ];
             
-            const randomIndex = Math.floor(Math.random() * sadlvls.length);
-            const selectedCat = sadlvls[randomIndex];
-            
-            sadlvls.forEach(id => {
-                document.getElementById(id).style.display = 'none';
-            });
-            document.getElementById('catImage').style.display = 'none';
-            document.getElementById('inlovecat').style.display = 'none';
-   
-            document.getElementById(selectedCat).style.display = 'block';
+            const randomCat = sadCats[Math.floor(Math.random() * sadCats.length)];
+            const displayCat = document.getElementById('displayCat');
+            displayCat.src = randomCat;
+            displayCat.style.display = 'block';
+            //dropEm();
+
         }
         
         document.getElementById('noBtn').addEventListener('click', kuringRandom);
-        
         document.getElementById('yesBtn').addEventListener('click', function() {
+            const displayCat = document.getElementById('displayCat');
+            displayCat.src = "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/inLoveCat.gif";
+            displayCat.style.display = 'block';
+        });
+
+       /* function dropEm(){
+            const emojis = ['😢','😭', '😞', '😔', '🥺', '😥', '💔']
+
+            for(let i =0; i < 20; i++){ 
+                const span = document.createElement('span');
+                span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                span.className = 'falling-emoji';
+                span.style.left = Math.random() * 100 + 'vw';
+                span.style.animationDuration = '3s';
+                document.body.appendChild(span);
+                span.addEventListener('animationend', function() {
+                    span.remove();
+                });
+        }
+    }*/
+        /*document.getElementById('yesBtn').addEventListener('click', function() {
             for (let i = 1; i <= 7; i++) {
                 document.getElementById('sadlvl' + i).style.display = 'none';
             }
             document.getElementById('catImage').style.display = 'none';
             document.getElementById('inlovecat').style.display = 'block';
-        });
+        });*/
     </script>
 </body>
 </html>
