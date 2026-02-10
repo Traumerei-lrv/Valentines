@@ -42,29 +42,24 @@
 
 
     <script>
-        function showRandomSadCat() {
-            // Array of all sad level image IDs
-            const sadLevels = ['sadlvl1', 'sadlvl2', 'sadlvl3', 'sadlvl4', 'sadlvl5', 'sadlvl6', 'sadlvl7'];
+        function kuringRandom() {
+            const sadlvls = ['sadlvl1', 'sadlvl2', 'sadlvl3', 'sadlvl4', 'sadlvl5', 'sadlvl6', 'sadlvl7'];
             
-            // Pick a random sad level
-            const randomIndex = Math.floor(Math.random() * sadLevels.length);
-            const selectedSadCat = sadLevels[randomIndex];
+            const randomIndex = Math.floor(Math.random() * sadlvls.length);
+            const selectedCat = sadlvls[randomIndex];
             
-            // Hide all images except the selected one
-            sadLevels.forEach(id => {
+            sadlvls.forEach(id => {
                 document.getElementById(id).style.display = 'none';
             });
             document.getElementById('catImage').style.display = 'none';
             document.getElementById('inlovecat').style.display = 'none';
-            
-            // Show the randomly selected sad cat
-            document.getElementById(selectedSadCat).style.display = 'block';
+   
+            document.getElementById(selectedCat).style.display = 'block';
         }
         
-        document.getElementById('noBtn').addEventListener('click', showRandomSadCat);
+        document.getElementById('noBtn').addEventListener('click', kuringRandom);
         
         document.getElementById('yesBtn').addEventListener('click', function() {
-            // Hide all sad cats
             for (let i = 1; i <= 7; i++) {
                 document.getElementById('sadlvl' + i).style.display = 'none';
             }
