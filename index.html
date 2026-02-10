@@ -9,6 +9,7 @@
             text-align: center;
             font-family: Arial, sans-serif;
             padding: 20px;
+            color: valentine;
         }
         button {
             margin: 10px;
@@ -16,30 +17,52 @@
             font-size: 16px;
             cursor: pointer;
         }
-        #displayCat {
+        #displayCat,#grrr,#success {
             display: none;
-            max-width: 400px;
+            max-width: 500px;
             margin: 20px auto;
         }
     </style>
 </head>
 <body>
-    <h1>Will you be my Valentine?</h1>
+    <div id="question"><h1>Will you be my Valentine?</h1></div>
     <button id="yesBtn">Yes</button>
     <button id="noBtn">No</button>
     
+    <div id="success" style=" font-size: 35px;"><h1>Thank you😻</h1></div>
+    
     <!--<img id="catImage" src="https://media1.tenor.com/m/2pIAmP3j1GwAAAAC/slap-table-green-alien-cat-angry.gif" alt="cat angry">-->
     <img id="displayCat" alt="cat image">
-    <audio controls autoplay>
-        <source src="https://www.myinstants.com/en/instant/musica-romantica-23580/?utm_source=copy&utm_medium=share" type="audio/mpeg">
+    <audio id="grrr" controls>
+        <source src="https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/sounds/romantic.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
 
 
     <script>
+
+        const displayCat = document.getElementById('displayCat');
+        const displayAudio = document.getElementById('grrr');
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const question = document.getElementById('question');
+        const successMessage = document.getElementById('success');
+
+        function hideElements() {
+            noBtn.style.display = 'none';
+            yesBtn.style.display = 'none';
+            question.style.display = 'none';
+        }
+
+        function removeAds() {
+            const fakeAds = document.querySelectorAll('#fake_ads');
+            fakeAds.forEach(ad => ad.remove());
+        }
+
         function kuringRandom() {
-            const sadCats = [
+            showFakeAd();
+            /*const sadCats = [
                 "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat1.webp",
                 "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat2.gif",
                 "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat3.gif",
@@ -50,42 +73,48 @@
             ];
             
             const randomCat = sadCats[Math.floor(Math.random() * sadCats.length)];
-            const displayCat = document.getElementById('displayCat');
             displayCat.src = randomCat;
             displayCat.style.display = 'block';
-            //dropEm();
+            displayAudio.style.display = 'none';*/
 
         }
         
-        document.getElementById('noBtn').addEventListener('click', kuringRandom);
-        document.getElementById('yesBtn').addEventListener('click', function(){
-            const displayCat = document.getElementById('displayCat');
+        noBtn.addEventListener('click', kuringRandom);
+        yesBtn.addEventListener('click', function(){
             displayCat.src = "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/freaky.gif";
+            hideElements();
+            removeAds();    
+            displayAudio.play();
             displayCat.style.display = 'block';
+            displayAudio.style.display = 'block';
+            successMessage.style.display = 'block';
+            });
 
-        });
-       /* function dropEm(){
-            const emojis = ['😢','😭', '😞', '😔', '🥺', '😥', '💔']
-
-            for(let i =0; i < 20; i++){ 
-                const span = document.createElement('span');
-                span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-                span.className = 'falling-emoji';
-                span.style.left = Math.random() * 100 + 'vw';
-                span.style.animationDuration = '3s';
-                document.body.appendChild(span);
-                span.addEventListener('animationend', function() {
-                    span.remove();
-                });
-        }
-    }*/
-        /*document.getElementById('yesBtn').addEventListener('click', function() {
-            for (let i = 1; i <= 7; i++) {
-                document.getElementById('sadlvl' + i).style.display = 'none';
-            }
-            document.getElementById('catImage').style.display = 'none';
-            document.getElementById('inlovecat').style.display = 'block';
-        });*/
+        
+    function showFakeAd() {
+        const ads = [
+            "🔥HOT SINGLES IN YOUR AREA!🔥",
+            "💊DOCTORS HATE THIS TRICK!💊",
+            "🎰YOU WON $1,000,000!!! CLICK HERE🎰",
+            "📱YOUR PHONE HAS 99 VIRUSES!!!📱",
+            "🏆Congratulations! You're the 1,000,000th visitor!🏆",
+            "💎Get rich quick with this one simple trick!💎",
+            "🐱Click here for a surprise!🐱",
+            "🔥LONELY MILFS IN YOUR AREA!🔥"
+        ];
+    
+        const ad = document.createElement('div');
+        ad.innerHTML = `
+            <div id="fake_ads"style="position:fixed; top:${Math.random()*60}%; left:${Math.random()*60}%;
+                background: linear-gradient(yellow, orange); border: 3px solid red;
+                padding: 20px; z-index: 9999; border-radius: 10px; max-width: 250px;
+                box-shadow: 5px 5px 15px rgba(0,0,0,0.3); cursor: pointer;">
+                <span style="float:right; font-weight:bold;" onclick="this.parentElement.parentElement.remove()">✖</span>
+                <p style="font-weight:bold; color:red; margin:0;">${ads[Math.floor(Math.random() * ads.length)]}</p>
+            </div>
+        `;
+        document.body.appendChild(ad);
+    }
     </script>
 </body>
 </html>
