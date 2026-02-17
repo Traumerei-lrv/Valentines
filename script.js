@@ -1,60 +1,10 @@
-<!DOCTYPE htmii
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Card</title>
-    <!--<link rel="stylesheet" href="style.css">-->
-    <!--<script src="script.js" defer></script>-->
-    <style>
-          body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            color: #FF3334;
-            background-color:#FFDEE3 ;
-        }
-        button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        #displayCat,#grrr,#success {
-            display: none;
-            max-width: 500px;
-            margin: 20px auto;
-        }
-	</style>
-</head>
-<body>
-    <div id="question"><h1>Will you be my Valentine?</h1></div>
-    <button id="yesBtn">Yes</button>
-    <button id="noBtn">No</button>
-    
-    <div id="success" style=" font-size: 35px;">
-        <h1>Thank you😻</h1>
-    <img id="displayCat" alt="cat image">
-        <audio id="grrr" controls>
-            <source src="https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/sounds/romantic.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
 
-        <br>
-         <button id="moreBtn">click me</button>
-    </div>
-
-    
-    <!--<img id="catImage" src="https://media1.tenor.com/m/2pIAmP3j1GwAAAAC/slap-table-green-alien-cat-angry.gif" alt="cat angry">-->
-
-    <script>
-
-        const displayCat = document.getElementById('displayCat');
-        const displayAudio = document.getElementById('grrr');
-        const yesBtn = document.getElementById('yesBtn');
-        const noBtn = document.getElementById('noBtn');
-        const question = document.getElementById('question');
-        const successMessage = document.getElementById('success');
+const displayCat = document.getElementById('displayCat');
+const displayAudio = document.getElementById('grrr');
+const yesBtn = document.getElementById('yesBtn');
+const noBtn = document.getElementById('noBtn');
+const question = document.getElementById('question');
+const successMessage = document.getElementById('success');
 
         function hideElements() {
             noBtn.style.display = 'none';
@@ -88,7 +38,7 @@
         
         noBtn.addEventListener('click', kuringRandom);
         yesBtn.addEventListener('click', function(){
-            displayCat.src = "assests/gif/cat/freaky.gif";
+            displayCat.src = "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/freaky.gif";
             hideElements();
             removeAds();    
             displayAudio.play();
@@ -122,7 +72,3 @@
         `;
         document.body.appendChild(ad);
     }
-    </script>
-</body>
-</html>
-    
