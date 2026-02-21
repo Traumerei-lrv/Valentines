@@ -11,29 +11,303 @@
             text-align: center;
             font-family: Arial, sans-serif;
             padding: 20px;
-            color: #FF3334;
+            color: #FF6F77;
             background-color:#FFDEE3 ;
+            /*FF8896*/
         }
         button {
             margin: 10px;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            background:#FF8896 ;
+            border: solid 1px #C00000;
         }
         #displayCat,#grrr,#success {
             display: none;
             max-width: 500px;
             margin: 20px auto;
         }
+
+        /* ===== YES REACTION ENHANCEMENTS ===== */
+        @keyframes screenShake {
+            0%, 100% { transform: translate(0); }
+            10% { transform: translate(-8px, 5px); }
+            20% { transform: translate(8px, -5px); }
+            30% { transform: translate(-6px, -4px); }
+            40% { transform: translate(6px, 4px); }
+            50% { transform: translate(-4px, 6px); }
+            60% { transform: translate(4px, -6px); }
+            70% { transform: translate(-3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            90% { transform: translate(-1px, 1px); }
+        }
+
+        @keyframes heartFloat {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg) scale(0.3); opacity: 0; }
+        }
+
+        @keyframes pulseTitle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        @keyframes wiggleCat {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-8deg); }
+            75% { transform: rotate(8deg); }
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(0) rotate(-15deg); opacity: 0; }
+            60% { transform: scale(1.2) rotate(5deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes bgFlash {
+            0% { background-color: #FFDEE3; }
+            15% { background-color: #ff9aa2; }
+            30% { background-color: #FFB7C5; }
+            45% { background-color: #ff6b81; }
+            60% { background-color: #FFB7C5; }
+            75% { background-color: #ff9aa2; }
+            100% { background-color: #FFDEE3; }
+        }
+
+        .shaking { animation: screenShake 0.6s ease-in-out; }
+        .bg-flash { animation: bgFlash 1.2s ease-in-out; }
+
+        .success-title {
+            animation: pulseTitle 0.8s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        .cat-wiggle {
+            animation: wiggleCat 0.4s ease-in-out infinite, zoomIn 0.8s ease-out;
+        }
+
+        .heart-particle {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: heartFloat 3s ease-in forwards;
+        }
+
+        /* ===== SAD / NO REACTION EFFECTS ===== */
+        @keyframes sadShake {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-3px, 2px); }
+            40% { transform: translate(3px, -2px); }
+            60% { transform: translate(-2px, -1px); }
+            80% { transform: translate(2px, 1px); }
+        }
+
+        @keyframes sadBgFlash {
+            0% { background-color: #FFDEE3; }
+            30% { background-color: #d4d4d4; }
+            60% { background-color: #b8c6db; }
+            100% { background-color: #FFDEE3; }
+        }
+
+        @keyframes tearFall {
+            0% { transform: translateY(-10vh) scale(1); opacity: 1; }
+            80% { opacity: 0.7; }
+            100% { transform: translateY(110vh) scale(0.5); opacity: 0; }
+        }
+
+        @keyframes sadBounce {
+            0%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-8px); }
+            50% { transform: translateY(4px); }
+            70% { transform: translateY(-3px); }
+        }
+
+        .sad-shaking { animation: sadShake 0.4s ease-in-out; }
+        .sad-bg { animation: sadBgFlash 1s ease-in-out; }
+
+        .sad-particle {
+            position: fixed;
+            top: -30px;
+            pointer-events: none;
+            z-index: 9998;
+            animation: tearFall 3s linear forwards;
+        }
+
+        .sad-bounce {
+            animation: sadBounce 0.5s ease-in-out;
+        }
+
+        /* ===== ENVELOPE / CARD ===== */
+        .envelope-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+        }
+
+        .envelope-hint {
+            font-size: 1rem;
+            color: #e8828a;
+            margin-bottom: 14px;
+            animation: pulseTitle 1.5s ease-in-out infinite;
+        }
+
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            cursor: pointer;
+            perspective: 800px;
+        }
+
+        .envelope-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #fff 0%, #ffe8ea 100%);
+            border-radius: 8px;
+            border: 3px solid #FF8896;
+            box-shadow: 0 6px 20px rgba(255, 111, 119, 0.3);
+            z-index: 1;
+        }
+
+        /* Heart seal on the envelope */
+        .envelope-seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            z-index: 5;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        /* Flap (triangle) */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 110px solid #FF8896;
+            z-index: 4;
+            transform-origin: top center;
+            transition: transform 0.6s ease-in-out;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .envelope-flap-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 147px solid transparent;
+            border-right: 147px solid transparent;
+            border-top: 107px solid #ffd6db;
+            z-index: 4;
+            transform-origin: top center;
+            transition: transform 0.6s ease-in-out;
+            left: 3px;
+        }
+
+        /* Letter inside */
+        .envelope-letter {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            background: #fff;
+            border-radius: 6px;
+            border: 2px solid #ffb3b8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 0;
+            opacity: 0;
+            transform: translateY(0);
+            transition: transform 0.8s ease-out 0.3s, opacity 0.5s ease-out 0.3s;
+            padding: 10px;
+        }
+
+        .envelope-letter p {
+            font-size: 0.85rem;
+            color: #C00000;
+            margin: 0;
+            font-weight: bold;
+            font-family: Georgia, serif;
+        }
+
+        /* Opened state */
+        .envelope.opened .envelope-flap,
+        .envelope.opened .envelope-flap-inner {
+            transform: rotateX(180deg);
+        }
+
+        .envelope.opened .envelope-seal {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+        }
+
+        .envelope.opened .envelope-letter {
+            opacity: 1;
+            transform: translateY(-120px);
+            z-index: 6;
+        }
+
+        /* Question area - hidden until envelope opened */
+        #questionArea {
+            display: none;
+            animation: zoomIn 0.5s ease-out;
+            min-height: 70vh;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
 	</style>
 </head>
 <body>
-    <div id="question"><h1>Will you be my Valentine?</h1></div>
-    <button id="yesBtn">Yes</button>
-    <button id="noBtn">No</button>
+    <!-- Envelope -->
+    <div class="envelope-wrapper" id="envelopeWrapper">
+        <p class="envelope-hint">For you 💌</p>
+        <div class="envelope" id="envelope" onclick="openEnvelope()">
+            <div class="envelope-flap"></div>
+            <div class="envelope-flap-inner"></div>
+            <div class="envelope-seal">💌</div>
+            <div class="envelope-body"></div>
+            <div class="envelope-letter">
+                <p>I have something<br>to ask you...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question + buttons (hidden until envelope opens) -->
+    <div id="questionArea">
+        <div id="question"><h1>Will you be my Valentine?</h1></div>
+        <p id="guiltText" style="display:none; font-size:1.1rem; color:#C00000; margin:0 0 10px; font-style:italic;"></p>
+        <img id="sadCatImg" style="display:none; max-width:280px; border-radius:12px; margin:0 auto 15px;" alt="sad cat">
+        <div>
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
     
     <div id="success" style=" font-size: 35px;">
-        <h1>Thank you😻</h1>
+        <h1 id="thankYou">Thank you😻</h1>
     <img id="displayCat" alt="cat image">
         <audio id="grrr" controls>
             <source src="https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/sounds/romantic.mp3" type="audio/mpeg">
@@ -41,25 +315,39 @@
         </audio>
 
         <br>
-         <button id="moreBtn"><a href="date.html">Click me</a></button>
+         <button onclick="window.location.href='date.html'" id="moreBtn">Click me</button>
     </div>
 
     
     <!--<img id="catImage" src="https://media1.tenor.com/m/2pIAmP3j1GwAAAAC/slap-table-green-alien-cat-angry.gif" alt="cat angry">-->
 
     <script>
-
+        const moreBtn = document.getElementById('moreBtn');
         const displayCat = document.getElementById('displayCat');
         const displayAudio = document.getElementById('grrr');
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
         const question = document.getElementById('question');
         const successMessage = document.getElementById('success');
+        const questionArea = document.getElementById('questionArea');
+
+        function openEnvelope() {
+            const envelope = document.getElementById('envelope');
+            if (envelope.classList.contains('opened')) return;
+            envelope.classList.add('opened');
+
+            // After the letter rises and flap opens, show the question
+            setTimeout(() => {
+                document.getElementById('envelopeWrapper').style.display = 'none';
+                questionArea.style.display = 'flex';
+            }, 1500);
+        }
 
         function hideElements() {
             noBtn.style.display = 'none';
             yesBtn.style.display = 'none';
             question.style.display = 'none';
+            questionArea.style.display = 'none';
         }
 
         function removeAds() {
@@ -69,34 +357,137 @@
 
         function kuringRandom() {
             showFakeAd();
-            /*const sadCats = [
-                "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat1.webp",
-                "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat2.gif",
-                "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat3.gif",
-                "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat4.webp",
-                "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat5.gif",
-                "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat6.webp",
-                "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/sadCat7.gif"
-            ];
-            
-            const randomCat = sadCats[Math.floor(Math.random() * sadCats.length)];
-            displayCat.src = randomCat;
-            displayCat.style.display = 'block';
-            displayAudio.style.display = 'none';*/
 
+            // Sad screen effects
+            document.body.classList.add('sad-shaking', 'sad-bg');
+            setTimeout(() => document.body.classList.remove('sad-shaking', 'sad-bg'), 1000);
+
+            // Spawn falling tears / broken hearts
+            spawnSadParticles(15);
+
+            const sadCats = [
+                "assests/gif/cat/sadCat1.webp",
+                "assests/gif/cat/sadCat2.gif",
+                "assests/gif/cat/sadCat3.gif",
+                "assests/gif/cat/sadCat4.webp",
+                "assests/gif/cat/sadCat5.gif",
+                "assests/gif/cat/sadCat6.webp",
+                "assests/gif/cat/sadCat7.gif"
+            ];
+
+            const guiltMessages = [
+                "Are you sure? 🥺",
+                "Please reconsider... 😿",
+                "You're breaking my heart! 💔",
+                "I promise I'll be good! 🙏",
+                "Don't do this to me... 😭",
+                "I'll wait forever for you! ⏳",
+                "PLEASE SAY YES!!! 😱"
+            ];
+
+            // Track how many times No was clicked
+            if (!window.noClickCount) window.noClickCount = 0;
+            window.noClickCount++;
+
+            // 1. Show sad cat (cycle through them)
+            const catIndex = Math.min(window.noClickCount - 1, sadCats.length - 1);
+            const sadCatImg = document.getElementById('sadCatImg');
+            sadCatImg.src = sadCats[catIndex];
+            sadCatImg.style.display = 'block';
+            sadCatImg.classList.remove('sad-bounce');
+            void sadCatImg.offsetWidth; // force reflow
+            sadCatImg.classList.add('sad-bounce');
+
+            // 2. Show guilt trip message
+            const msgIndex = Math.min(window.noClickCount - 1, guiltMessages.length - 1);
+            const guiltText = document.getElementById('guiltText');
+            guiltText.textContent = guiltMessages[msgIndex];
+            guiltText.style.display = 'block';
+
+            // 3. Grow the Yes button
+            const scale = 1 + (window.noClickCount * 0.3);
+            yesBtn.style.transform = 'scale(' + scale + ')';
+            yesBtn.style.transition = 'transform 0.3s ease';
+            yesBtn.style.zIndex = '100';
+
+            // 4. Shrink the No button
+            const noScale = Math.max(0.3, 1 - (window.noClickCount * 0.12));
+            noBtn.style.transform = 'scale(' + noScale + ')';
+            noBtn.style.transition = 'transform 0.3s ease, top 0.3s ease, left 0.3s ease';
+
+            // 5. Make No button run away (random position)
+            noBtn.style.position = 'fixed';
+            noBtn.style.top = Math.random() * 70 + 10 + '%';
+            noBtn.style.left = Math.random() * 70 + 10 + '%';
+            noBtn.style.zIndex = '999';
+        }
+
+        function spawnSadParticles(count) {
+            const sadEmojis = ['💧', '💔', '😢', '😿', '🫣', '☔', '💨'];
+            for (let i = 0; i < count; i++) {
+                const p = document.createElement('div');
+                p.className = 'sad-particle';
+                p.textContent = sadEmojis[Math.floor(Math.random() * sadEmojis.length)];
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.fontSize = (18 + Math.random() * 24) + 'px';
+                p.style.animationDuration = (2 + Math.random() * 2.5) + 's';
+                p.style.animationDelay = Math.random() * 0.6 + 's';
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 5000);
+            }
         }
         
         noBtn.addEventListener('click', kuringRandom);
         yesBtn.addEventListener('click', function(){
-            displayCat.src = "assests/gif/cat/freaky.gif";
-            hideElements();
-            removeAds();    
-            displayAudio.play();
-            displayCat.style.display = 'block';
-            displayAudio.style.display = 'block';
-            successMessage.style.display = 'block';
-            });
+            // Screen shake
+            document.body.classList.add('shaking', 'bg-flash');
+            setTimeout(() => document.body.classList.remove('shaking', 'bg-flash'), 1200);
 
+            // Spray hearts everywhere
+            spawnHearts(30);
+
+            // Small delay for dramatic effect
+            setTimeout(() => {
+                displayCat.src = "https://raw.githubusercontent.com/Traumerei-lrv/Valentines/main/assests/gif/cat/freaky.gif";
+                hideElements();
+                removeAds();
+                displayAudio.play();
+                displayCat.style.display = 'block';
+                displayAudio.style.display = 'block';
+                successMessage.style.display = 'block';
+
+                // Animate the cat image
+                displayCat.classList.add('cat-wiggle');
+                setTimeout(() => displayCat.classList.remove('cat-wiggle'), 3000);
+
+                // Pulsing title
+                document.getElementById('thankYou').classList.add('success-title');
+
+                // Keep spawning hearts for a bit
+                let rounds = 0;
+                const heartInterval = setInterval(() => {
+                    spawnHearts(8);
+                    rounds++;
+                    if (rounds > 5) clearInterval(heartInterval);
+                }, 800);
+            }, 400);
+        });
+
+        function spawnHearts(count) {
+            const hearts = ['❤️', '💕', '💖', '💗', '💘', '😻', '🫶', '💋', '🔥'];
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-particle';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = (80 + Math.random() * 20) + 'vh';
+                heart.style.fontSize = (16 + Math.random() * 28) + 'px';
+                heart.style.animationDuration = (2 + Math.random() * 3) + 's';
+                heart.style.animationDelay = Math.random() * 0.5 + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }
+        }
         
     function showFakeAd() {
         const ads = [
