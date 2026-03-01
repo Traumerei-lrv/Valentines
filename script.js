@@ -7,6 +7,10 @@ const questionArea = document.getElementById('questionArea');
 const sadCatImg = document.getElementById('sadCatImg');
 const guiltText = document.getElementById('guiltText');
 
+document.getElementById('dismissNotice').addEventListener('click', function () {
+    document.getElementById('volumeNotice').style.display = 'none';
+});
+
 const sadCats = [
     'assests/gif/cat/sadCat1.webp',
     'assests/gif/cat/sadCat2.gif',
@@ -34,8 +38,8 @@ const sadSounds = [
     'assests/sounds/sad-music.mp3',
     'assests/sounds/tf_nemesis.mp3'
 ];
-const sadAudio = new Audio();
-const romanticAudio = new Audio('assests/sounds/romantic.mp3');
+const sadAudio = document.getElementById('sadAudio');
+const romanticAudio = document.getElementById('romanticAudio');
 
 function playRandomSadSound() {
     const randomSound = sadSounds[Math.floor(Math.random() * sadSounds.length)];
